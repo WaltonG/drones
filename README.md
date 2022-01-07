@@ -17,7 +17,7 @@ Useful drone functions include delivery of small items that are (urgently) neede
 
 ### Task description
 
-We have a fleet of **10 drones**. A drone is capable of carrying devices, other than cameras, and capable of delivering small loads. For our use case **the load is medications**.
+We havee a fleet of **10 drones**. A drone is capable of carrying devices, other than cameras, and capable of delivering small loads. For our use case **the load is medications**.
 
 A **Drone** has:
 - serial number (100 characters max);
