@@ -112,5 +112,9 @@ public class Drone {
 		this.state = state;
 	}
 	
+	public void addMedication(Medication medication) {
+		medication.setDrone(this);
+		medications.add(medication);
+	}
 }
 
