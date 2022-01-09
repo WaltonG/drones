@@ -7,17 +7,14 @@ public enum ModelType {
 	Cruiserweight("Cruiserweight"),
 	Heavyweight("Heavyweight");
 	
-	private final String name;
+	private final String modelType;
 	
-	ModelType(String name) {
-		this.name = name;
+	ModelType(String modelType) {
+		this.modelType = modelType;
 	}
 	
-	public String getName() {
-		return name;
+	public String getmodelType() {
+		return modelType;
 	}
 	
-	public String getType() {
-		return this.toString();
-	}
 }

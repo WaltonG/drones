@@ -9,17 +9,14 @@ public enum Status {
 	DELIVERED("Delivered"),
 	RETURNING("Returning");
 	
-	private final String name;
+	private final String status;
 	
-	Status(String name) {
-		this.name = name;
+	Status(String status) {
+		this.status = status;
 	}
 	
 	public String getName() {
-		return name;
+		return status;
 	}
-	
-	public String getType() {
-		return this.toString();
-	}
+
 }
