@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.musala.drones.exceptions.DroneNotFoundException;
 import com.musala.drones.exceptions.DroneRegistrationException;
 import com.musala.drones.models.Drone;
 import com.musala.drones.models.Medication;
@@ -44,7 +45,7 @@ public class DroneServiceImpl implements DroneService {
 	}
 	
 	@Override
-	public String loadDroneWithMedications(MedicineLoadDTO dto) {
+	public String loadDroneWithMedications(MedicineLoadDTO dto) throws DroneNotFoundException {
 		
 		if (dto.getMedications().isEmpty())
 			return "No medications to be loaded ";
@@ -56,6 +57,10 @@ public class DroneServiceImpl implements DroneService {
 			return "Invalid serial number!";
 		
 		Optional<Drone> optionalDrone = repository.findById(dto.getSerialNumber());
+		
+		if (!optionalDrone.isPresent())
+			throw new DroneNotFoundException("Drone not found");
+		
 		Drone drone = optionalDrone.orElseGet(null);
 		
 		if (drone == null)
