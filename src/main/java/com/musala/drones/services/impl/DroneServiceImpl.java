@@ -86,12 +86,13 @@ public class DroneServiceImpl implements DroneService {
 		final double totalMedicationsWeight = filteredMedications.stream().mapToDouble(Medication::getWeight).sum();
 		final List<Medication> availableLoad = new ArrayList<>();
 		if (drone.getMedications().isEmpty() && drone.getWeightLimit() >= totalMedicationsWeight) {
-            saveLoadedMedications(drone, filteredMedications);
+			saveLoadedMedications(drone, filteredMedications);
 			return "Medications loaded";
-		}else {
-            double availableSpace = drone.getWeightLimit() - drone.getMedications().stream().mapToDouble(Medication::getWeight).sum();
-            if (availableSpace > totalMedicationsWeight) {
-                saveLoadedMedications(drone, filteredMedications);
+		} else {
+			double availableSpace = drone.getWeightLimit()
+			        - drone.getMedications().stream().mapToDouble(Medication::getWeight).sum();
+			if (availableSpace > totalMedicationsWeight) {
+				saveLoadedMedications(drone, filteredMedications);
 				return "Medications loaded";
 			} else {
 				for (Medication m : filteredMedications) {
@@ -115,5 +116,20 @@ public class DroneServiceImpl implements DroneService {
 	private void saveLoadedMedications(Drone drone, List<Medication> list) {
 		list.forEach(drone::addMedication);
 		repository.save(drone);
+	}
+	
+	@Override
+	public List<Medication> checkMedicationItemsForDrone(String serialNumber) throws DroneNotFoundException {
+		Optional<Drone> optionalDrone = repository.findById(serialNumber);
+		if (!optionalDrone.isPresent())
+			throw new DroneNotFoundException("Drone not found");
+		
+		Drone drone = optionalDrone.orElseGet(null);
+		
+		if (drone == null)
+			throw new DroneNotFoundException("Drone not found");
+		
+		return drone.getMedications();
+		
 	}
 }
