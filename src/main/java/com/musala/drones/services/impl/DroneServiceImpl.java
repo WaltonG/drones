@@ -143,4 +143,19 @@ public class DroneServiceImpl implements DroneService {
 		                && drone.getBatteryPercentage() >= 25))
 		        .collect(Collectors.toList());
 	}
+	
+	@Override
+	public int checkBatteryLevelForDrone(String serialNumber) throws DroneNotFoundException {
+		Optional<Drone> optionalDrone = repository.findById(serialNumber);
+		if (!optionalDrone.isPresent())
+			throw new DroneNotFoundException("Drone not found");
+		
+		Drone drone = optionalDrone.orElseGet(null);
+		
+		if (drone == null)
+			throw new DroneNotFoundException("Drone not found");
+		
+		return drone.getBatteryPercentage();
+		
+	}
 }

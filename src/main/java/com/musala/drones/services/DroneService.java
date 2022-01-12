@@ -18,4 +18,6 @@ public interface DroneService {
 	
 	List<Drone> checkAvailableDronesForLoading();
 	
+	int checkBatteryLevelForDrone(String serialNumber) throws DroneNotFoundException;
+	
 }

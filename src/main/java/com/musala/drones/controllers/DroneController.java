@@ -53,4 +53,11 @@ public class DroneController {
 		return new ResponseEntity<List<Drone>>(droneService.checkAvailableDronesForLoading(), HttpStatus.OK);
 		
 	}
+	
+	@RequestMapping(value = "/checkbatterylevel/{serialNumber}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	ResponseEntity<Integer> checkBatteryLevelForDrone(@PathVariable(value = "serialNumber") String serialNumber)
+	        throws DroneNotFoundException {
+		return new ResponseEntity<Integer>(droneService.checkBatteryLevelForDrone(serialNumber), HttpStatus.OK);
+		
+	}
 }
