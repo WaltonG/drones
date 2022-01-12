@@ -12,7 +12,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,8 +38,7 @@ public class Medication extends DatabaseAudit {
 	private Drone drone;
 	
 	@Lob
-	@Type(type = "org.hibernate.type.BinaryType")
-	@Column(name = "image")
+	@Column(name = "imageByte", length = 1000)
 	private byte[] image;
 	
 	public Medication() {

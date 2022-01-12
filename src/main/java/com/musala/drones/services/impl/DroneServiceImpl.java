@@ -17,7 +17,7 @@ import com.musala.drones.exceptions.DroneRegistrationException;
 import com.musala.drones.models.Drone;
 import com.musala.drones.models.Medication;
 import com.musala.drones.models.Status;
-import com.musala.drones.models.dto.MedicineLoadDTO;
+import com.musala.drones.models.dto.MedicationLoadDTO;
 import com.musala.drones.repositories.DroneRepository;
 import com.musala.drones.services.DroneService;
 import com.musala.drones.util.Validator;
@@ -47,7 +47,7 @@ public class DroneServiceImpl implements DroneService {
 	}
 	
 	@Override
-	public String loadDroneWithMedications(MedicineLoadDTO dto) throws DroneNotFoundException {
+	public String loadDroneWithMedications(MedicationLoadDTO dto) throws DroneNotFoundException {
 		
 		if (dto.getMedications().isEmpty())
 			return "No medications to be loaded ";

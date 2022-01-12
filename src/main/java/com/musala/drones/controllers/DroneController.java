@@ -16,7 +16,7 @@ import com.musala.drones.exceptions.DroneNotFoundException;
 import com.musala.drones.exceptions.DroneRegistrationException;
 import com.musala.drones.models.Drone;
 import com.musala.drones.models.Medication;
-import com.musala.drones.models.dto.MedicineLoadDTO;
+import com.musala.drones.models.dto.MedicationLoadDTO;
 import com.musala.drones.services.DroneService;
 
 @RestController
@@ -38,7 +38,7 @@ public class DroneController {
 	}
 	
 	@RequestMapping(value = "/loaddrone", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	ResponseEntity<String> loadDroneWithMedications(@RequestBody MedicineLoadDTO dto) throws DroneNotFoundException {
+	ResponseEntity<String> loadDroneWithMedications(@RequestBody MedicationLoadDTO dto) throws DroneNotFoundException {
 		return new ResponseEntity<String>(droneService.loadDroneWithMedications(dto), HttpStatus.OK);
 	}
 	

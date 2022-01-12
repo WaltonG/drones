@@ -6,13 +6,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.musala.drones.models.Medication;
 
 @JsonIgnoreProperties(ignoreUnknown = true, allowGetters = true, allowSetters = true)
-public class MedicineLoadDTO {
+public class MedicationLoadDTO {
 	
 	String serialNumber;
 	
 	List<Medication> medications;
 	
-	public MedicineLoadDTO(String serialNumber, List<Medication> medications) {
+	public MedicationLoadDTO(String serialNumber, List<Medication> medications) {
 		this.serialNumber = serialNumber;
 		this.medications = medications;
 	}
