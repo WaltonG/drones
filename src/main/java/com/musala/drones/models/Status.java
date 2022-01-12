@@ -14,9 +14,12 @@ public enum Status {
 	Status(String status) {
 		this.status = status;
 	}
+
 	
-	public String getName() {
+	public String getStatus() {
 		return status;
 	}
+	
+
 
 }

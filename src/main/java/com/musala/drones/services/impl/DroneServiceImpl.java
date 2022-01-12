@@ -87,12 +87,14 @@ public class DroneServiceImpl implements DroneService {
 		final List<Medication> availableLoad = new ArrayList<>();
 		if (drone.getMedications().isEmpty() && drone.getWeightLimit() >= totalMedicationsWeight) {
 			saveLoadedMedications(drone, filteredMedications);
+			drone.setState(Status.LOADED);
 			return "Medications loaded";
 		} else {
 			double availableSpace = drone.getWeightLimit()
 			        - drone.getMedications().stream().mapToDouble(Medication::getWeight).sum();
 			if (availableSpace > totalMedicationsWeight) {
 				saveLoadedMedications(drone, filteredMedications);
+				drone.setState(Status.LOADED);
 				return "Medications loaded";
 			} else {
 				for (Medication m : filteredMedications) {
@@ -108,6 +110,7 @@ public class DroneServiceImpl implements DroneService {
 		
 		if (!availableLoad.isEmpty()) {
 			saveLoadedMedications(drone, availableLoad);
+			drone.setState(Status.LOADED);
 			return "Medications loaded";
 		}
 		return "Weight exceeded";
@@ -131,5 +134,13 @@ public class DroneServiceImpl implements DroneService {
 		
 		return drone.getMedications();
 		
+	}
+	
+	@Override
+	public List<Drone> checkAvailableDronesForLoading() {
+		return repository.findAll().stream()
+		        .filter(drone -> ((drone.getState().equals(Status.IDLE) || drone.getState().equals(Status.LOADING))
+		                && drone.getBatteryPercentage() >= 25))
+		        .collect(Collectors.toList());
 	}
 }

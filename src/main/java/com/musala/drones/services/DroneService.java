@@ -16,4 +16,6 @@ public interface DroneService {
 	
 	List<Medication> checkMedicationItemsForDrone(String serialNumber) throws DroneNotFoundException;
 	
+	List<Drone> checkAvailableDronesForLoading();
+	
 }

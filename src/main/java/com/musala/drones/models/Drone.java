@@ -31,7 +31,7 @@ public class Drone {
 	@Column(name = "battery_percentage")
 	private int batteryPercentage;
 	
-	@Column(name = "status")
+	@Column(name = "state")
 	private Status state;
 	
 	@OneToMany(mappedBy = "drone", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -42,7 +42,6 @@ public class Drone {
 	}
 	
 	public Drone(String serialNumber, ModelType model, double weightLimit, int batteryPercentage, Status state) {
-		super();
 		this.serialNumber = serialNumber;
 		this.model = model;
 		this.weightLimit = weightLimit;
@@ -53,7 +52,6 @@ public class Drone {
 	
 	public Drone(String serialNumber, ModelType model, double weightLimit, int batteryPercentage, Status state,
 	    List<Medication> medications) {
-		super();
 		this.serialNumber = serialNumber;
 		this.model = model;
 		this.weightLimit = weightLimit;

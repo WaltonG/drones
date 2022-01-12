@@ -47,4 +47,10 @@ public class DroneController {
 	        throws DroneNotFoundException {
 		return new ResponseEntity<List<Medication>>(droneService.checkMedicationItemsForDrone(serialNumber), HttpStatus.OK);
     }
+	
+	@RequestMapping(value = "/dronesavailableforloading", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	ResponseEntity<List<Drone>> checkAvailableDronesForLoading() {
+		return new ResponseEntity<List<Drone>>(droneService.checkAvailableDronesForLoading(), HttpStatus.OK);
+		
+	}
 }
