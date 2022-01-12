@@ -1,6 +1,7 @@
 package com.musala.drones.models;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "drone")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Drone {
+public class Drone extends DatabaseAudit {
 	
 	@Id
 	@Column(name = "serial_number", length = 100, unique = true)
@@ -38,7 +39,9 @@ public class Drone {
 	private List<Medication> medications;
 	
 	public Drone() {
-		
+		this.createdAt = new Date();
+		this.updatedAt = new Date();
+		this.medications = new ArrayList<>();
 	}
 	
 	public Drone(String serialNumber, ModelType model, double weightLimit, int batteryPercentage, Status state) {
@@ -48,6 +51,8 @@ public class Drone {
 		this.batteryPercentage = batteryPercentage;
 		this.state = state;
 		this.medications = new ArrayList<>();
+		this.createdAt = new Date();
+		this.updatedAt = new Date();
 	}
 	
 	public Drone(String serialNumber, ModelType model, double weightLimit, int batteryPercentage, Status state,
@@ -58,6 +63,8 @@ public class Drone {
 		this.batteryPercentage = batteryPercentage;
 		this.state = state;
 		this.medications = medications != null ? medications : new ArrayList<>();
+		this.createdAt = new Date();
+		this.updatedAt = new Date();
 	}
 	
 	public String getSerialNumber() {
@@ -112,6 +119,8 @@ public class Drone {
 	
 	public void addMedication(Medication medication) {
 		medication.setDrone(this);
+		medication.setCreatedAt(new Date());
+		medication.setUpdatedAt(new Date());
 		medications.add(medication);
 	}
 }

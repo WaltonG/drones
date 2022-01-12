@@ -3,11 +3,13 @@ package com.musala.drones.services.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.musala.drones.exceptions.DroneNotFoundException;
@@ -157,5 +159,14 @@ public class DroneServiceImpl implements DroneService {
 		
 		return drone.getBatteryPercentage();
 		
+	}
+	
+	@Async
+	@Override
+	public CompletableFuture<List<Drone>> getAllDrones() {
+		return CompletableFuture.supplyAsync(repository::findAll).exceptionally(exec -> {
+			logger.error(exec.getMessage());
+			return null;
+		});
 	}
 }

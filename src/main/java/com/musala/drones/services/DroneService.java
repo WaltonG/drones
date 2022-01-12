@@ -1,6 +1,7 @@
 package com.musala.drones.services;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import com.musala.drones.exceptions.DroneNotFoundException;
 import com.musala.drones.exceptions.DroneRegistrationException;
@@ -19,5 +20,7 @@ public interface DroneService {
 	List<Drone> checkAvailableDronesForLoading();
 	
 	int checkBatteryLevelForDrone(String serialNumber) throws DroneNotFoundException;
+	
+	CompletableFuture<List<Drone>> getAllDrones();
 	
 }

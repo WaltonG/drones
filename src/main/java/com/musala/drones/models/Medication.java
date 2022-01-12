@@ -1,5 +1,7 @@
 package com.musala.drones.models;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "medication")
 @JsonIgnoreProperties(ignoreUnknown = true, allowGetters = true, allowSetters = true)
-public class Medication {
+public class Medication extends DatabaseAudit {
 	
 	@Id
 	@Column(name = "code")
@@ -45,6 +47,22 @@ public class Medication {
 		
 	}
 	
+	public Medication(String name, double weight, String code) {
+		this.name = name;
+		this.weight = weight;
+		this.code = code;
+		this.createdAt = new Date();
+		this.updatedAt = new Date();
+	}
+	
+	public Medication(String name, double weight, String code, byte[] image) {
+		this.name = name;
+		this.weight = weight;
+		this.code = code;
+		this.image = image;
+		this.createdAt = new Date();
+		this.updatedAt = new Date();
+	}
 	public String getCode() {
 		return code;
 	}
