@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>com.musala</groupId>
 	<artifactId>drones</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>Drones</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Rest API for Drones and Medications</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
