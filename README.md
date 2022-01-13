@@ -1,64 +1,27 @@
-## Drones
+### Drones
 
-[[_TOC_]]
+## Introduction
 
----
-
-:scroll: **START**
-
-
-### Introduction
-
-There is a major new technology that is destined to be a disruptive force in the field of transportation: **the drone**. Just as the mobile phone allowed developing countries to leapfrog older technologies for personal communication, the drone has the potential to leapfrog traditional transportation infrastructure.
-
-Useful drone functions include delivery of small items that are (urgently) needed in locations with difficult access.
+This project has been developed using Spring Boot, Java 8 and H2 in memory database as the database. The database cofiguration file is **application.properties**.
 
 ---
 
-### Task description
-
-We have a fleet of **10 drones**. A drone is capable of carrying devices, other than cameras, and capable of delivering small loads. For our use case **the load is medications**.
-
-A **Drone** has:
-- serial number (100 characters max);
-- model (Lightweight, Middleweight, Cruiserweight, Heavyweight);
-- weight limit (500gr max);
-- battery capacity (percentage);
-- state (IDLE, LOADING, LOADED, DELIVERING, DELIVERED, RETURNING).
-
-Each **Medication** has: 
-- name (allowed only letters, numbers, ‘-‘, ‘_’);
-- weight;
-- code (allowed only upper case letters, underscore and numbers);
-- image (picture of the medication case).
-
-Develop a service via REST API that allows clients to communicate with the drones (i.e. **dispatch controller**). The specific communicaiton with the drone is outside the scope of this task. 
-
-The service should allow:
+### REST API Service
+The service allows:
 - registering a drone;
 - loading a drone with medication items;
 - checking loaded medication items for a given drone; 
 - checking available drones for loading;
 - check drone battery level for a given drone;
 
-> Feel free to make assumptions for the design approach. 
-
----
-
-### Requirements
-
-While implementing your solution **please take care of the following requirements**: 
-
-#### Functional requirements
+## Functional requirements
 
 - There is no need for UI;
 - Prevent the drone from being loaded with more weight that it can carry;
 - Prevent the drone from being in LOADING state if the battery level is **below 25%**;
 - Introduce a periodic task to check drones battery levels and create history/audit event log for this.
 
----
-
-#### Non-functional requirements
+## Non-functional requirements
 
 - Input/output data must be in JSON format;
 - Your project must be buildable and runnable;
@@ -67,6 +30,92 @@ While implementing your solution **please take care of the following requirement
 - JUnit tests are optional but advisable (if you have time);
 - Advice: Show us how you work through your commit history.
 
+## Prerequisites
+
+- Java (Minimum 8)
+- Jre
+
+## Build the application
+
+mvn clean package
+
+## Run the application
+
+mvn spring-boot:run
+
 ---
 
-:scroll: **END** 
+### API documentation
+
+#1. Registering a drone
+
+Use post method with json body. Url is **http://localhost:8080/api/v1/drone**
+
+Example:
+
+POST: http://localhost:8080/api/v1/drone
+
+BODY: {
+        "serialNumber": "Middle_Weight_Drone_5",
+        "model": "Middleweight",
+        "weightLimit": 68.0,
+        "batteryPercentage": 70,
+        "state": "IDLE",
+        "medication": []
+	  }
+
+#2. Load drone with medication items
+
+Use post method with json body. Url is **http://localhost:8080/api/v1/drone/loaddrone**
+
+Example
+
+POST: http://localhost:8080/api/v1/drone/loaddrone
+
+BODY: {
+        "serialNumber": "Middle_Weight_Drone_5",
+        "medications": [
+            {
+                "name": "GABAPENTIN",
+                "weight": 30,
+                "code": "GABAPENTIN_200",
+                "image": null
+            }
+        ]
+    }
+
+#3. Checking loaded medication items for a given drone
+
+Use get method with drone serial number. Url is **http://localhost:8080/api/v1/drone/checkmedications/{serialNumber}**
+
+Example
+
+GET: http://localhost:8080/api/v1/drone/checkmedications/Middle_Weight_Drone_5
+
+#4. Checking drones available for loading
+
+Use get method. Url is **http://localhost:8080/api/v1/drone/dronesavailableforloading**
+
+
+Example
+
+GET: http://localhost:8080/api/v1/drone/dronesavailableforloading
+
+#5. Checking drone battery level
+
+Use get method with drone serial number. Url is **http://localhost:8080/api/v1/drone/checkbatterylevel/{serialNumber}**
+
+Example
+
+GET: http://localhost:8080/api/v1/drone/checkbatterylevel/Middle_Weight_Drone_5
+
+#6. Add medication image
+
+Use post method with form-data body. Url is **http://localhost:8080/api/v1/medication/imageUpload*
+
+Example
+
+POST: http://localhost:8080/api/v1/medication/imageUpload
+
+BODY: "image" : "The uploaded medication image"
+      "code" "The medication code"
