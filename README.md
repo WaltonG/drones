@@ -64,7 +64,7 @@ BODY: {
         "medication": []
 	  }
 
-#2. Load drone with medication items
+##2. Load drone with medication items
 
 Use post method with json body. Url is **http://localhost:8080/api/v1/drone/loaddrone**
 
@@ -84,7 +84,7 @@ BODY: {
         ]
     }
 
-#3. Checking loaded medication items for a given drone
+##3. Checking loaded medication items for a given drone
 
 Use get method with drone serial number. Url is **http://localhost:8080/api/v1/drone/checkmedications/{serialNumber}**
 
@@ -92,7 +92,7 @@ Example
 
 GET: http://localhost:8080/api/v1/drone/checkmedications/Middle_Weight_Drone_5
 
-#4. Checking drones available for loading
+##4. Checking drones available for loading
 
 Use get method. Url is **http://localhost:8080/api/v1/drone/dronesavailableforloading**
 
@@ -101,7 +101,7 @@ Example
 
 GET: http://localhost:8080/api/v1/drone/dronesavailableforloading
 
-#5. Checking drone battery level
+##5. Checking drone battery level
 
 Use get method with drone serial number. Url is **http://localhost:8080/api/v1/drone/checkbatterylevel/{serialNumber}**
 
@@ -109,7 +109,7 @@ Example
 
 GET: http://localhost:8080/api/v1/drone/checkbatterylevel/Middle_Weight_Drone_5
 
-#6. Add medication image
+##6. Add medication image
 
 Use post method with form-data body. Url is **http://localhost:8080/api/v1/medication/imageUpload*
 
